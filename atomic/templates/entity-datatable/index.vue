@@ -40,7 +40,7 @@
     :reorderable-columns="props.reorderableColumns"
     :expanded-rows="props.expandedRows"
     :expanded-row-icon="props.expandedRowIcon"
-    :collaspe-row-icon="props.collaspeRowIcon"
+    :collapsed-row-icon="props.collapsedRowIcon"
     :row-group-mode="props.rowGroupMode"
     :group-rows-by="props.groupRowsBy"
     :expandable-row-groups="props.expandableRowGroups"
@@ -86,6 +86,27 @@
     @row-click="props.openDialog?.('show', $event.data)"
     class="entity-datatable"
   >
+    <Column
+      v-if="shareEnabled"
+      class="share-checkbox-column"
+    >
+      <template #header>
+        <nuc-share-checkbox
+          :ad-type="props.adType"
+          :checked="isAllSelected"
+          :indeterminate="isIndeterminate"
+          :is-all="true"
+          @toggle="toggleAll"
+        />
+      </template>
+      <template #body="{ data }">
+        <nuc-share-checkbox
+          :ad-type="props.adType"
+          :checked="selected[data.id]"
+          @toggle="toggle(data.id)"
+        />
+      </template>
+    </Column>
     <Column
       v-for="col in specificColumns"
       :key="col.field"
@@ -150,6 +171,7 @@
   </ad-data-table>
 
   <nuc-entity-datatable-skeleton
+    :enable-share="shareEnabled"
     :rows="skeleton"
     :loading="props.loading"
     :specific-columns="specificColumns"
@@ -158,10 +180,16 @@
 
 <script setup lang="ts">
 import type { NucEntityDatatableInterface } from 'atomic'
-import { actions as actionsList, columns, useMenu, useSelect } from 'atomic'
+import {
+  actions as actionsList,
+  columns,
+  useMenu,
+  useSelect,
+  useShareSelection,
+} from 'atomic'
 
 const props = defineProps<NucEntityDatatableInterface>()
-const emits = defineEmits<{ (e: 'update:filters', value: unknown): void }>()
+const emits = defineEmits(['update:filters', 'update:selected'])
 
 const menu = ref()
 const actions = actionsList(props.openDialog!)
@@ -171,6 +199,26 @@ const { selectItems } = useSelect(selectedObject, props.openDialog!)
 
 const specificColumns = columns[props.adType as keyof typeof columns]
 const skeleton = ref(new Array(props.rows))
+
+const shareEnabled = computed(() => props.enableShare)
+
+const items = computed(() => props.value as { id: number }[] | undefined)
+const {
+  selected,
+  isAllSelected,
+  isIndeterminate,
+  toggle,
+  toggleAll,
+  getSelectedItems,
+} = useShareSelection(items)
+
+watch(
+  selected,
+  () => {
+    emits('update:selected', getSelectedItems())
+  },
+  { deep: true }
+)
 </script>
 
 <style lang="scss" scoped>

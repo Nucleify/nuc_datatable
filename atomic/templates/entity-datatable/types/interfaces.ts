@@ -1,3 +1,5 @@
 import type { DataTableInterface } from 'atomic'
 
-export interface NucEntityDatatableInterface extends DataTableInterface {}
+export interface NucEntityDatatableInterface extends DataTableInterface {
+  enableShare?: boolean
+}
