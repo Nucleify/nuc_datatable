@@ -64,7 +64,7 @@
         v-model:filters="filters"
         filter-display="row"
         paginator-template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown"
-        current-page-report-template="{first} to {last} of {totalRecords}"
+        :current-page-report-template="t('datatable-paginator', { first: '{first}', last: '{last}', totalRecords: '{totalRecords}' })"
         @update:selected="selectedItems = $event"
       />
     </template>
@@ -79,9 +79,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import type { NucEntityDatatableCardInterface } from 'atomic'
 import { columns } from 'atomic'
+
+const { t } = useI18n()
 
 const props = defineProps<NucEntityDatatableCardInterface>()
 

@@ -111,7 +111,7 @@
       v-for="col in specificColumns"
       :key="col.field"
       :field="col.field"
-      :header="col.header"
+      :header="t(col.header)"
       :class="col.class"
       :sortable="col.sortable"
       :filter="true"
@@ -121,7 +121,7 @@
         <ad-input-text
           v-model="filterModel.value"
           :value="filterModel.value || ''"
-          :placeholder="`Search by ${col.header}`"
+          :placeholder="t('column-search-placeholder', { column: t(col.header) })"
           :ad-type="props.adType"
           @input="filterCallback()"
         />
@@ -179,6 +179,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import type { NucEntityDatatableInterface } from 'atomic'
 import {
   actions as actionsList,
@@ -187,6 +189,8 @@ import {
   useSelect,
   useShareSelection,
 } from 'atomic'
+
+const { t } = useI18n()
 
 const props = defineProps<NucEntityDatatableInterface>()
 const emits = defineEmits(['update:filters', 'update:selected'])
