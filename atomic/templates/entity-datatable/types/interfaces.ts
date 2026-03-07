@@ -1,4 +1,4 @@
-import type { DataTableInterface } from 'atomic'
+import type { DataTableInterface } from 'nucleify'
 
 export interface NucEntityDatatableInterface extends DataTableInterface {
   enableShare?: boolean

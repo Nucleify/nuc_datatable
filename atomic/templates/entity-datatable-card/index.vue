@@ -81,8 +81,8 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import type { NucEntityDatatableCardInterface } from 'atomic'
-import { columns } from 'atomic'
+import type { NucEntityDatatableCardInterface } from 'nucleify'
+import { columns } from 'nucleify'
 
 const { t } = useI18n()
 

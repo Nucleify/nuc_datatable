@@ -1,4 +1,4 @@
-import type { ColumnInterface, LoadingType } from 'atomic'
+import type { ColumnInterface, LoadingType } from 'nucleify'
 
 export interface NucSkeletonDataTableInterface {
   rows: []

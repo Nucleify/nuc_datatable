@@ -1,4 +1,4 @@
-import type { OpenDialogFunctionType } from 'atomic'
+import type { OpenDialogFunctionType } from 'nucleify'
 
 export const actions = (
   openDialog: OpenDialogFunctionType

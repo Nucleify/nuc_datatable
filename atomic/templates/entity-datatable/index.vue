@@ -181,14 +181,14 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import type { NucEntityDatatableInterface } from 'atomic'
+import type { NucEntityDatatableInterface } from 'nucleify'
 import {
   actions as actionsList,
   columns,
   useMenu,
   useSelect,
   useShareSelection,
-} from 'atomic'
+} from 'nucleify'
 
 const { t } = useI18n()
 

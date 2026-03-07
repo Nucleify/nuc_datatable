@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NucSkeletonDataTableInterface } from 'atomic'
+import type { NucSkeletonDataTableInterface } from 'nucleify'
 
 const props = defineProps<NucSkeletonDataTableInterface>()
 </script>
