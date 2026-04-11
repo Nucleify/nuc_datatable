@@ -86,10 +86,7 @@
     @row-click="props.openDialog?.('show', $event.data)"
     class="entity-datatable"
   >
-    <Column
-      v-if="shareEnabled"
-      class="share-checkbox-column"
-    >
+    <Column v-if="shareEnabled" class="share-checkbox-column">
       <template #header>
         <nuc-share-checkbox
           :ad-type="props.adType"
