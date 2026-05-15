@@ -1,6 +1,7 @@
 <template>
   <ad-data-table
     v-if="props.loading"
+    :ad-type="props.adType"
     :value="props.rows"
     size="small"
     filter-display="row"

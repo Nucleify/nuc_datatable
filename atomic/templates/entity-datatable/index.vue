@@ -168,6 +168,7 @@
   </ad-data-table>
 
   <nuc-entity-datatable-skeleton
+    :ad-type="props.adType"
     :enable-share="shareEnabled"
     :rows="skeleton"
     :loading="props.loading"
