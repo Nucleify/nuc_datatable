@@ -1,8 +1,8 @@
-import type { HeadingInterface, NucEntityDatatableInterface } from 'nucleify'
+import type { NucEntityDatatableInterface } from 'nucleify'
 
 export interface NucEntityDatatableCardInterface
-  extends NucEntityDatatableInterface,
-    HeadingInterface {
+  extends NucEntityDatatableInterface {
   headerText?: string
   buttonText?: string
+  tag?: number
 }

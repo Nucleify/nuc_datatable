@@ -1,24 +1,29 @@
 .p-datatable.entity-datatable {
-  .p-datatable-table-container {
+  .p-datatable-table-container,
+  .p-datatable-wrapper {
     overflow: visible;
   }
 
   .p-button {
     padding: 0.25em;
 
-    .iconify {
+    .iconify,
+    .pi {
       font-size: 1.5em;
-      color: $primary-color;
     }
   }
 
   &:has(.p-skeleton) {
     .p-datatable-thead {
-      .p-datatable-header-cell {
-        &:has(.p-datatable-filter) {
+      .p-datatable-header-cell,
+      > tr > th {
+        &:has(.p-datatable-filter),
+        &:has(.p-column-filter-row) {
           padding: 9px !important;
 
-          .p-datatable-column-filter-button {
+          .p-datatable-column-filter-button,
+          .p-column-filter-menu-button,
+          .p-column-filter-clear-button {
             display: none;
           }
         }
@@ -30,8 +35,10 @@
     margin-top: .375em;
 
     .p-datatable-thead {
-      .p-datatable-header-cell {
-        &:has(.p-datatable-filter) {
+      .p-datatable-header-cell,
+      > tr > th {
+        &:has(.p-datatable-filter),
+        &:has(.p-column-filter-row) {
           position: relative;
           padding: 0 !important;
           overflow: visible;
@@ -40,32 +47,61 @@
             background-color: $bg-black-color !important;
           }
 
-          .p-datatable-filter {
-            .p-inputtext {
+          .p-datatable-filter,
+          .p-column-filter-row {
+            position: relative;
+
+            .p-column-filter-element {
+              flex: 1;
+              min-width: 0;
+            }
+
+            .p-inputtext,
+            .entity-datatable-filter-input {
               width: 100%;
               max-height: 40px;
+              padding-right: 2.5rem;
               z-index: 1;
-              transition: border-color 0.3s ease-in-out
+              transition:
+                border-color 0.3s ease-in-out,
                 box-shadow 0.3s ease-in-out;
-        
+
               &:not(:hover) {
                 &:not(:focus) {
                   border-color: transparent !important;
                 }
               }
             }
-    
+
+            .p-column-filter-menu-button,
+            .p-column-filter-clear-button:not(.p-hidden-space),
+            .p-datatable-column-filter-button,
             .p-button {
               position: absolute !important;
+              top: 0;
               right: 0;
               height: 100%;
               width: 40px;
+              margin: 0 !important;
               border-radius: 50%;
               border: transparent !important;
-    
-              &:not(:hover) {
-                background: transparent;
+              background: transparent !important;
+              color: var(--hl-item) !important;
+
+              .pi,
+              svg {
+                color: inherit !important;
               }
+
+              &:hover,
+              &.p-column-filter-menu-button-active,
+              &.p-column-filter-menu-button-open {
+                background: var(--hl-highlight) !important;
+              }
+            }
+
+            .p-column-filter-clear-button.p-hidden-space {
+              display: none !important;
             }
           }
         }
@@ -78,8 +114,22 @@
       justify-content: center;
       width: 0.5%;
 
-      .p-datatable-column-header-content {
+      .p-datatable-column-header-content,
+      .p-column-header-content {
         justify-content: center;
+      }
+
+      // Match Nuxt look/size for share selection checkboxes
+      .p-checkbox {
+        width: 22px;
+        height: 22px;
+
+        .p-checkbox-box {
+          width: 22px;
+          height: 22px;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
       }
     }
     
@@ -333,13 +383,89 @@
       }
     }
   }
+
+  .p-datatable-thead {
+    .p-datatable-column-sorted,
+    .p-sortable-column.p-datatable-column-sorted,
+    th.p-datatable-column-sorted,
+    .p-datatable-header-cell.p-datatable-column-sorted,
+    .p-sortable-column.p-highlight,
+    th.p-sortable-column.p-highlight,
+    .p-datatable-header-cell.p-highlight {
+      background-color: var(--hl-highlight) !important;
+
+      .p-datatable-column-title,
+      .p-column-title {
+        color: var(--hl-item) !important;
+      }
+
+      .p-datatable-sort-icon,
+      .p-sortable-column-icon,
+      .p-column-sort-icon,
+      [data-pc-section='sort'],
+      [data-pc-section='sort'] svg {
+        color: var(--hl-item) !important;
+      }
+    }
+
+    th:not(.p-datatable-column-sorted, .p-highlight, .action-column):hover,
+    .p-datatable-header-cell:not(.p-datatable-column-sorted, .p-highlight, .action-column):hover {
+      background-color: var(--hl-highlight) !important;
+    }
+  }
+
+  .p-datatable-tbody > tr {
+    border: none !important;
+    cursor: pointer;
+
+    &:nth-child(odd) {
+      background-color: $content-background !important;
+
+      > td {
+        background-color: $content-background !important;
+        color: $white-text-color !important;
+      }
+    }
+
+    &:nth-child(even) {
+      background-color: $p-card-background !important;
+
+      > td {
+        background-color: $p-card-background !important;
+        color: $white-text-color !important;
+      }
+    }
+
+    &:hover,
+    &.p-highlight {
+      background-color: var(--hl-highlight) !important;
+
+      > td {
+        background-color: var(--hl-highlight) !important;
+      }
+    }
+  }
+
+  &.p-datatable-hoverable {
+    .p-datatable-tbody > tr:hover,
+    .p-datatable-tbody > tr.p-highlight {
+      background-color: var(--hl-highlight) !important;
+
+      > td {
+        background-color: var(--hl-highlight) !important;
+      }
+    }
+  }
 }
 
-.p-datatable-filter-overlay {
-  .p-datatable-filter-constraint-list {
+.p-datatable-filter-overlay,
+.p-column-filter-overlay {
+  .p-datatable-filter-constraint-list,
+  .p-column-filter-row-items {
     padding: 0;
 
-    .p-datatable-filter-constraint {
+    .p-datatable-filter-constraint,
+    .p-column-filter-row-item {
       &:hover:not(&-selected) {
         background-color: $content-background !important;
       }

@@ -1,8 +1,8 @@
-import type { ColumnInterface, DataTableInterface, LoadingType } from 'nucleify'
+import type { ColumnInterface, LoadingType } from 'nucleify'
 
-export interface NucSkeletonDataTableInterface
-  extends Pick<DataTableInterface, 'adType'> {
-  rows: []
+export interface NucSkeletonDataTableInterface {
+  adType: string
+  rows: unknown[]
   enableShare?: boolean
   loading: LoadingType
   specificColumns: ColumnInterface[]

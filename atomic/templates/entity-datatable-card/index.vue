@@ -107,15 +107,7 @@ const globalFilterFields = computed(() =>
   specificColumns.map((col: { field?: string }) => col.field).filter(Boolean)
 )
 
-const disabledShareTypes = [
-  'activity',
-  'user',
-  'card',
-  'question',
-  'link',
-  'feature',
-  'technology',
-]
+const disabledShareTypes = ['activity', 'user', 'question', 'technology']
 const shareEnabled = computed(
   () => !disabledShareTypes.includes(props.adType as string)
 )

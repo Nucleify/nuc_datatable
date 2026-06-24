@@ -1,20 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import type { ColumnInterface, ColumnsInterface } from 'nucleify'
+import type { ColumnInterface } from 'nucleify'
 
 const createColumn = (
   field: string,
   header: string,
-  className: string,
-  sortable: boolean = true
+  className: string
 ): ColumnInterface => ({
   field,
   header,
   class: className,
-  sortable,
 })
 
-const columnsData: readonly ColumnsInterface[] = {
+const columnsData: Record<string, readonly [string, string, string][]> = {
   activity: [
     ['id', 'column-id', 'id-activity-column'],
     ['description', 'column-description', 'description-column'],
@@ -91,13 +87,14 @@ const columnsData: readonly ColumnsInterface[] = {
   ],
 } as const
 
-export const columns: readonly ColumnsInterface[] = Object.fromEntries(
-  Object.entries(columnsData).map(
-    ([key, data]): readonly ColumnsInterface[] => [
-      key,
-      data.map(([field, header, className]) =>
-        createColumn(field, header, className)
-      ),
-    ]
+export const columns: Record<string, readonly ColumnInterface[]> =
+  Object.fromEntries(
+    Object.entries(columnsData).map(
+      ([key, data]): [string, readonly ColumnInterface[]] => [
+        key,
+        data.map(([field, header, className]) =>
+          createColumn(field, header, className)
+        ),
+      ]
+    )
   )
-)

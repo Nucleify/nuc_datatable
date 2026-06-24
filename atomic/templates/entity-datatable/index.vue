@@ -112,7 +112,7 @@
       :class="col.class"
       :sortable="col.sortable"
       :filter="true"
-      filterMatchMode="contains"
+      filter-match-mode="contains"
     >
       <template #filter="{ filterModel, filterCallback }">
         <ad-input-text
@@ -160,12 +160,13 @@
               :loading="props.loading"
               @click="openMenu(menu, $event, row.data)"
             />
-            <ad-menu ref="menu" :model="selectItems" :popup="true" />
           </template>
         </div>
       </template>
     </Column>
   </ad-data-table>
+
+  <ad-menu ref="menu" :model="selectItems" :popup="true" />
 
   <nuc-entity-datatable-skeleton
     :ad-type="props.adType"
@@ -223,6 +224,6 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'index';
 </style>

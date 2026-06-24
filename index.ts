@@ -1,13 +1,11 @@
-/**
- *  Module's main file export
- */
 export * from './nuc_datatable'
 
-/**
- *  Folders exports
- */
-export * from './atomic'
-
-/**
- *  File exports
- */
+export * from './atomic/bosons/types/interfaces'
+export * from './atomic/templates/entity-datatable/constants/actions'
+export * from './atomic/templates/entity-datatable/constants/columns'
+export { default as NucEntityDataTable } from './atomic/templates/entity-datatable/index.vue'
+export * from './atomic/templates/entity-datatable/types/interfaces'
+export { default as NucEntityDataTableCard } from './atomic/templates/entity-datatable-card/index.vue'
+export * from './atomic/templates/entity-datatable-card/types/interfaces'
+export { default as NucEntityDataTableSkeleton } from './atomic/templates/entity-datatable-skeleton/index.vue'
+export * from './atomic/templates/entity-datatable-skeleton/types/interfaces'

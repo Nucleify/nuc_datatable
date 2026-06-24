@@ -28,11 +28,13 @@
       gap: 0.5em;
     }
 
-    .p-card-caption {
+    .p-card-caption,
+    .p-card-header {
       margin-bottom: 6px;
     }
 
-    .p-card-body {
+    .p-card-body,
+    .ad-card-body {
       margin-bottom: 2px;
     }
   }

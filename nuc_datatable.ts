@@ -4,7 +4,7 @@ import {
   NucEntityDataTable,
   NucEntityDataTableCard,
   NucEntityDataTableSkeleton,
-} from '.'
+} from 'nucleify'
 
 export function registerNucDataTable(app: App<Element>): void {
   app
