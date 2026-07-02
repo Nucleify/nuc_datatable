@@ -27,8 +27,8 @@ export const NucEntityDataTableCard: React.FC<
   type ColumnWithField = { field?: string }
 
   const specificColumns = useMemo(() => {
-    return columns[props.adType as keyof typeof columns] || []
-  }, [props.adType])
+    return columns[props.nuiType as keyof typeof columns] || []
+  }, [props.nuiType])
 
   const globalFilterFields = useMemo(() => {
     return specificColumns
@@ -47,8 +47,8 @@ export const NucEntityDataTableCard: React.FC<
   ]
 
   const shareEnabled = useMemo(() => {
-    return !disabledShareTypes.includes(props.adType as string)
-  }, [props.adType])
+    return !disabledShareTypes.includes(props.nuiType as string)
+  }, [props.nuiType])
 
   const [filters, setFilters] = useState(() => {
     const initialFilters: DataTableFilterMeta = {
@@ -84,18 +84,18 @@ export const NucEntityDataTableCard: React.FC<
           <AdHeading tag={props.tag ?? 3} text={props.headerText} />
 
           <div className="nuc-entity-datatable-card-header-actions">
-            {props.adType !== 'activity' && (
+            {props.nuiType !== 'activity' && (
               <AdButton
-                adType={props.adType as AdTypeType}
+                nuiType={props.nuiType as NuiTypeType}
                 icon="prime:share-alt"
                 rounded
                 text
                 onClick={() => setShareDialogVisible(true)}
               />
             )}
-            {props.adType !== 'activity' && (
+            {props.nuiType !== 'activity' && (
               <AdButton
-                adType={props.adType as AdTypeType}
+                nuiType={props.nuiType as NuiTypeType}
                 icon="prime:plus"
                 rounded
                 text
@@ -117,7 +117,7 @@ export const NucEntityDataTableCard: React.FC<
             rows={10}
             rowsPerPageOptions={[10, 20, 50]}
             openDialog={props.openDialog}
-            adType={props.adType}
+            nuiType={props.nuiType}
             loading={props.loading}
             globalFilterFields={globalFilterFields}
             enableShare={shareEnabled}
@@ -138,7 +138,7 @@ export const NucEntityDataTableCard: React.FC<
       <NucShareDialog
         visible={shareDialogVisible}
         onUpdateVisible={(val) => setShareDialogVisible(val)}
-        adType={props.adType as ObjectNameType}
+        nuiType={props.nuiType as ObjectNameType}
         selectedEntities={selectedItems}
       />
     </>

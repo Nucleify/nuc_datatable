@@ -31,16 +31,16 @@
 
           <div class="nuc-entity-datatable-card-header-actions">
             <ad-button
-              v-if="props.adType !== 'activity'"
-              :ad-type="props.adType"
+              v-if="props.nuiType !== 'activity'"
+              :nui-type="props.nuiType"
               icon="prime:share-alt"
               rounded
               text
               @click="shareDialogVisible = true"
             />
             <ad-button
-              v-if="props.adType !== 'activity'"
-              :ad-type="props.adType"
+              v-if="props.nuiType !== 'activity'"
+              :nui-type="props.nuiType"
               icon="prime:plus"
               rounded
               text
@@ -57,7 +57,7 @@
         :rows="10"
         :rows-per-page-options="[10, 20, 50]"
         :open-dialog="props.openDialog"
-        :ad-type="props.adType"
+        :nui-type="props.nuiType"
         :loading="props.loading"
         :global-filter-fields="globalFilterFields"
         :enable-share="shareEnabled"
@@ -72,7 +72,7 @@
 
   <nuc-share-dialog
     v-model:visible="shareDialogVisible"
-    :ad-type="props.adType"
+    :nui-type="props.nuiType"
     :selected-entities="selectedItems"
   />
 </template>
@@ -91,7 +91,7 @@ const props = defineProps<NucEntityDatatableCardInterface>()
 const shareDialogVisible = ref(false)
 const selectedItems = ref<unknown[]>([])
 
-const specificColumns = columns[props.adType as keyof typeof columns]
+const specificColumns = columns[props.nuiType as keyof typeof columns]
 
 const filters = ref({
   global: { value: '', matchMode: 'contains' },
@@ -109,7 +109,7 @@ const globalFilterFields = computed(() =>
 
 const disabledShareTypes = ['activity', 'user', 'question', 'technology']
 const shareEnabled = computed(
-  () => !disabledShareTypes.includes(props.adType as string)
+  () => !disabledShareTypes.includes(props.nuiType as string)
 )
 </script>
 

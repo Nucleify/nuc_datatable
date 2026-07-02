@@ -1,6 +1,6 @@
 <template>
   <ad-data-table
-    :ad-type="props.adType"
+    :nui-type="props.nuiType"
     :value="props.value"
     :data-key="props.dataKey"
     :rows="props.rows"
@@ -69,7 +69,7 @@
       filter: { 
         pt: { 
           root: { 
-            'ad-type': props.adType 
+            'nui-type': props.nuiType 
           } 
         } 
       }
@@ -89,7 +89,7 @@
     <Column v-if="shareEnabled" class="share-checkbox-column">
       <template #header>
         <nuc-share-checkbox
-          :ad-type="props.adType"
+          :nui-type="props.nuiType"
           :checked="isAllSelected"
           :indeterminate="isIndeterminate"
           :is-all="true"
@@ -98,7 +98,7 @@
       </template>
       <template #body="{ data }">
         <nuc-share-checkbox
-          :ad-type="props.adType"
+          :nui-type="props.nuiType"
           :checked="selected[data.id]"
           @toggle="toggle(data.id)"
         />
@@ -119,7 +119,7 @@
           v-model="filterModel.value"
           :value="filterModel.value || ''"
           :placeholder="t('column-search-placeholder', { column: t(col.header) })"
-          :ad-type="props.adType"
+          :nui-type="props.nuiType"
           @input="filterCallback()"
         />
       </template>
@@ -128,8 +128,8 @@
       <template #body="row">
         <div class="action-column-content">
           <ad-button
-            v-if="props.adType === 'activity'"
-            :ad-type="props.adType"
+            v-if="props.nuiType === 'activity'"
+            :nui-type="props.nuiType"
             class="data-table-button"
             icon="prime:trash"
             rounded
@@ -141,7 +141,7 @@
             <ad-button
               v-for="action in actions"
               :key="action.icon"
-              :ad-type="props.adType"
+              :nui-type="props.nuiType"
               media="desktop"
               variant="data-table"
               :icon="action.icon"
@@ -151,7 +151,7 @@
               @click="action.click(row.data)"
             />
             <ad-button
-              :ad-type="props.adType"
+              :nui-type="props.nuiType"
               media="mobile"
               variant="data-table"
               icon="prime:bars"
@@ -169,7 +169,7 @@
   <ad-menu ref="menu" :model="selectItems" :popup="true" />
 
   <nuc-entity-datatable-skeleton
-    :ad-type="props.adType"
+    :nui-type="props.nuiType"
     :enable-share="shareEnabled"
     :rows="skeleton"
     :loading="props.loading"
@@ -200,7 +200,7 @@ const actions = actionsList(props.openDialog!)
 const { openMenu, selectedObject } = useMenu()
 const { selectItems } = useSelect(selectedObject, props.openDialog!)
 
-const specificColumns = columns[props.adType as keyof typeof columns]
+const specificColumns = columns[props.nuiType as keyof typeof columns]
 const skeleton = ref(new Array(props.rows))
 
 const shareEnabled = computed(() => props.enableShare)

@@ -1,7 +1,7 @@
 <template>
   <ad-data-table
     v-if="props.loading"
-    :ad-type="props.adType"
+    :nui-type="props.nuiType"
     :value="props.rows"
     size="small"
     filter-display="row"

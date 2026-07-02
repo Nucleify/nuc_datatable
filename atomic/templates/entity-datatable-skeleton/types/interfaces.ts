@@ -1,7 +1,7 @@
 import type { ColumnInterface, LoadingType } from 'nucleify'
 
 export interface NucSkeletonDataTableInterface {
-  adType: string
+  nuiType: string
   rows: unknown[]
   enableShare?: boolean
   loading: LoadingType

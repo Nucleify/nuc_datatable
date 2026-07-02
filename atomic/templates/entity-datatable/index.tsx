@@ -52,7 +52,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
   const { t } = useTranslation()
 
   const {
-    adType,
+    nuiType,
     value,
     openDialog,
     enableShare,
@@ -90,8 +90,8 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
   const { selectItems } = useSelect(selectedObject, resolvedOpenDialog)
 
   const specificColumns = useMemo<readonly ColumnInterface[]>(() => {
-    return columns[adType as keyof typeof columns] || []
-  }, [adType])
+    return columns[nuiType as keyof typeof columns] || []
+  }, [nuiType])
 
   const skeletonRows = useMemo(() => Array.from({ length: rows }), [rows])
 
@@ -124,7 +124,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
   const shareHeaderTemplate = () => (
     <NucShareCheckbox
       key={`share-all-${isAllSelected}-${isIndeterminate}`}
-      adType={adType as AdTypeType}
+      nuiType={nuiType as NuiTypeType}
       checked={isAllSelected}
       indeterminate={isIndeterminate}
       isAll
@@ -134,7 +134,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
 
   const shareBodyTemplate = (rowData: ShareTableRow) => (
     <NucShareCheckbox
-      adType={adType as AdTypeType}
+      nuiType={nuiType as NuiTypeType}
       checked={rowData.__shareChecked}
       onToggle={() => toggle(rowData.id)}
     />
@@ -146,7 +146,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
   ) => (
     <AdInputText
       className="entity-datatable-filter-input"
-      adType={adType}
+      nuiType={nuiType}
       value={(options.value as string) || ''}
       placeholder={t('column-search-placeholder', { column: t(colHeader) })}
       onChange={(e) => options.filterApplyCallback(e.target.value)}
@@ -155,9 +155,9 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
 
   const actionBodyTemplate = (rowData: ShareTableRow) => (
     <div className="action-column-content">
-      {adType === 'activity' ? (
+      {nuiType === 'activity' ? (
         <AdButton
-          adType={adType as AdTypeType}
+          nuiType={nuiType as NuiTypeType}
           variant="data-table"
           icon="prime:trash"
           rounded
@@ -173,7 +173,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
           {actions.map((action: ActionItem) => (
             <AdButton
               key={action.icon}
-              adType={adType as AdTypeType}
+              nuiType={nuiType as NuiTypeType}
               media="desktop"
               variant="data-table"
               icon={action.icon}
@@ -187,7 +187,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
             />
           ))}
           <AdButton
-            adType={adType as AdTypeType}
+            nuiType={nuiType as NuiTypeType}
             media="mobile"
             variant="data-table"
             icon="prime:bars"
@@ -209,7 +209,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
     <>
       {!loading ? (
         <AdDataTable
-          adType={adType}
+          nuiType={nuiType}
           className="entity-datatable"
           dataKey="id"
           value={tableRows}
@@ -235,7 +235,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
 
           {specificColumns.map((col, index) => (
             <Column
-              key={col.field ?? `${adType}-col-${index}`}
+              key={col.field ?? `${nuiType}-col-${index}`}
               field={col.field}
               header={t(col.header ?? '')}
               className={col.class}
@@ -258,7 +258,7 @@ export const NucEntityDataTable: React.FC<NucEntityDataTableProps> = (
       ) : null}
 
       <NucEntityDataTableSkeleton
-        adType={adType as string}
+        nuiType={nuiType as string}
         enableShare={enableShare}
         rows={skeletonRows}
         loading={loading ?? false}

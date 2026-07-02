@@ -7,7 +7,7 @@ import { AdDataTable } from 'nucleify'
 
 export const NucEntityDataTableSkeleton: React.FC<
   NucSkeletonDataTableInterface
-> = ({ adType, loading, rows, enableShare, specificColumns }) => {
+> = ({ nuiType, loading, rows, enableShare, specificColumns }) => {
   if (!loading) return null
   const tableRows = rows.map((_, index) => ({ id: index }))
 
@@ -36,7 +36,7 @@ export const NucEntityDataTableSkeleton: React.FC<
 
   return (
     <AdDataTable
-      adType={adType as ObjectNameType}
+      nuiType={nuiType as ObjectNameType}
       value={tableRows}
       size="small"
       filterDisplay="row"
